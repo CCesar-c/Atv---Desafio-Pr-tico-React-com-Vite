@@ -1,11 +1,10 @@
+import React from 'react';
 import { useEffect, useState } from 'react'
 import '../css/App.css';
 import { Header } from '../components/Header.jsx'
 function App() {
-  useEffect(() => {
-    document.querySelector('.tela1').classList.add("enable")
-    document.querySelector('.tela2').classList.add("disable")
-  }, [])
+  const [Valor_class1, setClass1] = useState("tela1 enable")
+  const [Valor_class2, setClass2] = useState("tela2 disable")
   const [Valor_sinal, setSinal] = useState("")
   const [Value_nro1, setValue_nro1] = useState(0)
   const [Value_nro2, setValue_nro2] = useState(0)
@@ -35,32 +34,31 @@ function App() {
     var pergunta = String(prompt("Ja fez aniversario??"))
     if (pergunta.trim() == "sim") {
       setResultado(Value_nro2 - Value_nro1)
-    } else {
+    } else if (pergunta.trim() == "nao") {
       setResultado((Value_nro2 - Value_nro1) - 1)
+    } else {
+      setResultado("Resposta indefinida fdp: " + Valor_sinal)
     }
+
   }
   return (
-    <>
-      <Header id='Header' >
+    <body>
+      <Header id='Header'  >
         <button onClick={() => {
-
-          document.querySelector('.tela2').classList.toggle("enable")
-          document.querySelector('.tela2').classList.toggle("disable")
-          document.querySelector('.tela1').classList.toggle("disable")
-          document.querySelector('.tela1').classList.toggle("enable")
+          setClass1("tela1 enable")
+          setClass2("tela2 disable")
           setResultado(0)
         }} >Calculadora</button>
         <button onClick={() => {
-          document.querySelector('.tela1').classList.toggle("enable")
-          document.querySelector('.tela1').classList.toggle("disable")
-          document.querySelector('.tela2').classList.toggle("disable")
-          document.querySelector('.tela2').classList.toggle("enable")
+          setClass1("tela1 disable")
+          setClass2("tela2 enable")
+          setResultado(0)
         }}  >Calculador de idade </button>
       </Header>
       {/* tela 1 */}
       <home>
-        <div id='capsule' className='tela1' >
-          <h1>Calculadora </h1>
+        <div id='capsule' className={Valor_class1} >
+          <h1 >Calculadora </h1>
           <input placeholder='Primeiro nro da conta' type='number' maxLength={10} onChange={(e) => {
             setValue_nro1(Number(e.target.value.trim()))
           }} />
@@ -78,7 +76,7 @@ function App() {
           <text>Resultado: {Value_resultado}</text>
         </div>
         {/* tela 2 */}
-        <div id='capsule' className='tela2' >
+        <div id='capsule' className={Valor_class2} >
           <h1>Calculador de idade </h1>
           <input placeholder='Ano de nascimento' type='number' maxLength={10} onChange={(e) => {
             setValue_nro1(Number(e.target.value.trim()))
@@ -93,7 +91,7 @@ function App() {
           <text>Voce tem: {Value_resultado}</text>
         </div>
       </home>
-    </>
+    </body>
   )
 }
 

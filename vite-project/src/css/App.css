@@ -1,6 +1,9 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 home {
     display: flex;
-    background-color: black;
     height: 80vh;
     justify-content: center;
     align-items: center;
@@ -13,7 +16,7 @@ home {
 }
 
 body {
-    background: black;
+    background-color: rgb(97, 97, 97);
 }
 
 input {
@@ -21,21 +24,25 @@ input {
     padding: 10px;
     border-radius: 20px;
 }
-.disable{
+
+.disable {
     opacity: 0;
     display: none;
 }
-.enable{
+
+.enable {
     opacity: 1;
     display: flex;
 }
-button{
+
+button {
     padding: 10px;
     margin: 5px;
     border-color: black;
     border-radius: 10px;
     border-width: 3px;
 }
+
 #capsule {
     color: black;
     margin: 10px;
