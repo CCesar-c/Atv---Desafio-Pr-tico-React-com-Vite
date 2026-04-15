@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
 import '../css/App.css';
+import  Card, { Contador, ListaDeCompras } from '../components/Card.jsx'
 import { Header } from '../components/Header.jsx'
 function App() {
   const [Valor_class1, setClass1] = useState("tela1 enable")
@@ -91,6 +92,10 @@ function App() {
           <text>Voce tem: {Value_resultado}</text>
         </div>
       </home>
+      <Card nome="Ana Silva" idade={28} profissao="Desenvolvedora Front-end" foto="https://i.pravatar.cc/150?img=5" />
+      <Card nome="gustavo Silva" idade={18} profissao="Desenvolvedora back-end" foto="https://i.pravatar.cc/150?img=1" />
+      <Contador />
+
     </body>
   )
 }
