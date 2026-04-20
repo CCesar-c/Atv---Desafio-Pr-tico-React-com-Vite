@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import '../css/App.css';
 import Card, { Contador, ListaDeCompras } from '../components/Card.jsx'
 import { Header } from '../components/Header.jsx'
@@ -14,15 +14,15 @@ function App() {
   const [Value_nro2, setValue_nro2] = useState(0)
   const [Value_resultado, setResultado] = useState(0)
 
-  useEffect(() => {
-    axios.get("[https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar itens:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get("[https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Erro ao buscar itens:', error);
+  //     });
+  // }, []);
   function calcular_valor() {
     switch (Valor_sinal) {
       case "+":
@@ -126,6 +126,7 @@ function App() {
         <div id='capsule' className={Valor_class3} >
           <h1>Tela de perfil</h1>
           <Card nome="Ana Silva" idade={28} profissao="Desenvolvedora Front-end" foto="https://i.pravatar.cc/150?img=5" />
+          <br />
           <Card nome="gustavo Silva" idade={18} profissao="Desenvolvedora back-end" foto="https://i.pravatar.cc/150?img=1" />
         </div>
         {/* tela 4 */}
@@ -135,7 +136,6 @@ function App() {
           <Contador />
         </div>
       </home>
-
     </body>
   )
 }
