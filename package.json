@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "homepage": "http://CCesar-c.github.io/Atv-Test-React-com-Vite/",
+    "homepage": "http://CCesar-c.github.io/Atv-Test-React-com-Vite/index.html",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
