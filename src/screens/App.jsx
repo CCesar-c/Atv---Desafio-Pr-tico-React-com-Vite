@@ -7,9 +7,17 @@ import { Contador } from '../components/Contador.jsx'
 import { ListaDeCompras } from '../components/listaCompras.jsx'
 import { Header } from '../components/Header.jsx'
 import { Texto } from '../components/Texto.jsx'
-import { Personagens_naruto } from '../components/Lista_personages.jsx'
+import { Personagens_naruto, Personagens_reais } from '../components/Lista_personages.jsx'
 function App() {
-  var Array_botoes = [{ nome: "Calculadora", telaid: "tela1" }, { nome: "Calculador de idade", telaid: "tela2" }, { nome: "Cartão de perfil", telaid: "tela3" }, { nome: "Lista de compras", telaid: "tela4" }, { nome: "contador", telaid: "tela5" }, { nome: "Tela Axios", telaid: "tela6" }, { nome: "Atv Naruto", telaid: "tela7" }]
+  var Array_botoes = [
+    { nome: "Calculadora", telaid: "tela1" },
+    { nome: "Calculador de idade", telaid: "tela2" },
+    { nome: "Cartão de perfil", telaid: "tela3" },
+    { nome: "Lista de compras", telaid: "tela4" },
+    { nome: "contador", telaid: "tela5" },
+    { nome: "Tela Axios", telaid: "tela6" },
+    { nome: "Atv Naruto", telaid: "tela7" },
+    { nome: "Perfil", telaid: "tela8" }]
   const [Valor_class, setClass] = useState("tela1")
 
   const [Valor_sinal, setSinal] = useState("")
@@ -162,11 +170,16 @@ function App() {
           }) : <Texto>Sem usuarios</Texto>}
         </div> : null}
         {/* tela 7 */}
-        {/* https://api.jikan.moe/v4/characters/{id} */}
+
         {Valor_class == "tela7" ?
-          <div style={{ display: "flex", flexDirection: "row"}} >
+          <div style={{ display: "flex", flexDirection: "row" }} >
             <Personagens_naruto />
           </div> : null}
+        {/* tela 8 */}
+        {Valor_class == "tela8" ?
+          <Personagens_reais />
+          : null}
+
       </div>
     </>
   )
