@@ -18,7 +18,7 @@ export function Lista_filmes() {
             <h1>Fimes disponiveis</h1>
             <ul>
                 {filmes.map((filme) => (
-                    <li key={filme.id}>{filme.nome}</li>
+                    <li key={filme.id}>{filme.nome} - {filme.preco} - {filme.genero}</li>
                 ))}
             </ul>
         </div>

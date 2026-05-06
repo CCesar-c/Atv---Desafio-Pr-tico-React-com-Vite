@@ -5,6 +5,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 let filmes = [
     { id: 0, nome: 'Vingadores', preco: 1, genero: 'Ação' },
@@ -41,7 +42,6 @@ app.get('/produtos/:id', (req, res) => {
 })
 app.post('/filmes', (req, res) => {
     const { nome, preco, categoria } = req.body;
-    preco = Number(preco);
     filmes.push({
         id: filmes.length,
         nome,
