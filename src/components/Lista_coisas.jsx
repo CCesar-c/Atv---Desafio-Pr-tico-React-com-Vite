@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Texto } from "./Texto.jsx";
+import { CartaoPerfil } from "./Card.jsx";
 
 export function Lista_filmes() {
     const [filmes, setFilmes] = useState([]);
@@ -135,5 +136,20 @@ export function Lista_Axios_user() {
                 )
             }) : <Texto>Sem usuarios</Texto>}
         </div>
+    )
+}
+
+export function Criar_pessoas({ objeto }) {
+    return (
+        <ul>
+            <div style={{ flexDirection: "row", display: "flex", alignItems: "center" }} >
+                {objeto.map((item, key) => {
+                    return (
+                        <CartaoPerfil key={key} nome={item.nome} idade={item.idade} profissao={item.profissao} foto={"https://i.pravatar.cc/150?img=" + (key + 1)} />
+                    )
+                })}
+            </div>
+        </ul>
+
     )
 }
