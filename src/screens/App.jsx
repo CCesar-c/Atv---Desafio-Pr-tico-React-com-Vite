@@ -7,6 +7,7 @@ import { Contador } from '../components/Contador.jsx'
 import { ListaDeCompras } from '../components/listaCompras.jsx'
 import { Header } from '../components/Header.jsx'
 import { Texto } from '../components/Texto.jsx'
+import { Lista_filmes, Calculadora, Lista_Axios_user, Calcular_idade } from '../components/Lista_coisas.jsx';
 import { Personagens_naruto, Personagens_reais } from '../components/Lista_personages.jsx'
 function App() {
   var Array_botoes = [
@@ -17,7 +18,9 @@ function App() {
     { nome: "contador", telaid: "tela5" },
     { nome: "Tela Axios", telaid: "tela6" },
     { nome: "Atv Naruto", telaid: "tela7" },
-    { nome: "Perfil", telaid: "tela8" }]
+    { nome: "Perfil", telaid: "tela8" },
+    {nome:"Filmes", telaid:"tela9"}
+  ]
   const [Valor_class, setClass] = useState("tela1")
 
   const [Valor_sinal, setSinal] = useState("")
@@ -25,61 +28,6 @@ function App() {
   const [Value_nro2, setValue_nro2] = useState(0)
   const [Value_resultado, setResultado] = useState(0)
 
-
-  const [usuarios, setUsuarios] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-
-  async function buscarUsuarios() {
-
-    setLoading(true);
-
-    try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-      setUsuarios(response.data);
-    } catch (error) {
-
-      console.error("Erro!", error);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }
-
-  function calcular_valor() {
-    switch (Valor_sinal) {
-      case "+":
-        setResultado(Value_nro1 + Value_nro2)
-        break;
-      case "-":
-        setResultado(Value_nro1 - Value_nro2)
-        break;
-      case "*":
-        setResultado(Value_nro1 * Value_nro2)
-        break;
-      case "/":
-        setResultado(Value_nro1 / Value_nro2)
-        break;
-      default:
-        setResultado("Sinal indefinido: " + Valor_sinal)
-        break;
-    }
-
-  }
-
-  function calcular_idade() {
-    var pergunta = String(prompt("Ja fez aniversario??"))
-    if (pergunta.trim() == "sim") {
-      setResultado(Value_nro2 - Value_nro1)
-    } else if (pergunta.trim() == "nao") {
-      setResultado((Value_nro2 - Value_nro1) - 1)
-    } else {
-      setResultado("Resposta indefinida fdp: " + Valor_sinal)
-    }
-  }
   return (
     <>
       <Header id='Header'  >
@@ -93,40 +41,10 @@ function App() {
       <div id='container'>
         {/* tela 1 */}
         {Valor_class == "tela1" ?
-          <div id='capsule'  >
-            <h1 >Calculadora </h1>
-            <input placeholder='Primeiro nro da conta' type='number' maxLength={10} onChange={(e) => {
-              setValue_nro1(Number(e.target.value.trim()))
-            }} />
-            <br />
-            <input placeholder='tipo da conta' type='text' maxLength={1} onChange={(e) => {
-              setSinal(e.target.value.trim())
-            }} />
-            <br />
-            <input placeholder='Segundo numero da conta' type='number' maxLength={10} onChange={(e) => {
-              setValue_nro2(Number(e.target.value.trim()))
-            }} />
-            <br />
-            <button onClick={() => { calcular_valor() }} >Calcular o resultado</button>
-            <br />
-            <Texto>Resultado: {Value_resultado}</Texto>
-          </div>
+        Calculadora(Valor_sinal, setResultado, setValue_nro1, setValue_nro2, setSinal, Value_resultado, Value_nro1, Value_nro2)
           : null}
         {/* tela 2 */}
-        {Valor_class == "tela2" ? <div id='capsule'  >
-          <h1>Calculador de idade </h1>
-          <input placeholder='Ano de nascimento' type='number' maxLength={10} onChange={(e) => {
-            setValue_nro1(Number(e.target.value.trim()))
-          }} />
-          <br />
-          <input placeholder='Ano atual' type='number' maxLength={10} onChange={(e) => {
-            setValue_nro2(Number(e.target.value.trim()))
-          }} />
-          <br />
-          <button onClick={() => { calcular_idade() }} >Calcular o resultado</button>
-          <br />
-          <Texto>Voce tem: {Value_resultado}</Texto>
-        </div> : null}
+        {Valor_class == "tela2" ? Calcular_idade(setResultado, Value_nro1, Value_nro2, Valor_sinal, setValue_nro1, setValue_nro2, Value_resultado) : null}
         {/* tela 3 */}
         {Valor_class == "tela3" ? <div id='capsule' style={{ display: "flex", flexDirection: "column" }}  >
           <h1>Tela de perfil</h1>
@@ -151,23 +69,9 @@ function App() {
           </div>
         </div> : null}
         {/*  tela 6 */}
-        {Valor_class == "tela6" ? <div id='capsule' style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }} >
-          <h1>React + Axios (Consumo de API) 20/04 </h1>
-          <button onClick={() => { buscarUsuarios() }} >{loading ? "Carregando..." : "Buscar usuarios"}</button>
-          {usuarios != null ? usuarios.map((user, key) => {
-            return (
-              <div style={{ margin: "7px", padding: "5px", border: "1px solid black", borderRadius: "8px" }} >
-                <div key={key}>
-                  <Texto>Nome: {user.name} </Texto>
-                  <Texto>Email: {user.email} </Texto>
-                  <Texto>Cidade: {user.address.city} </Texto>
-                </div>
-              </div>
-            )
-          }) : <Texto>Sem usuarios</Texto>}
-        </div> : null}
+        {Valor_class == "tela6" ?
+         <Lista_Axios_user/> : null}
         {/* tela 7 */}
-
         {Valor_class == "tela7" ?
           <div style={{ display: "flex", flexDirection: "row" }} >
             <Personagens_naruto />
@@ -176,6 +80,10 @@ function App() {
         {Valor_class == "tela8" ?
           <Personagens_reais />
           : null}
+          {/* tela 9 */}
+          {Valor_class == "tela9" ?
+            <Lista_filmes />
+            : null}
 
       </div>
     </>

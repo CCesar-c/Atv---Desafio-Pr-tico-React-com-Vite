@@ -19,7 +19,11 @@ let produtos = [
     { id: 3, nome: 'Monitor', preco: 500, categoria: 'Eletrônicos' }
 ];
 
-app.get('/filmes:id', (req, res) => {
+app.get('/filmes', (req, res) => {
+    res.json(filmes);
+});
+
+app.get('/filmes/:id', (req, res) => {
     const id = req.params.id; // ou const { id } = req.params
     if (id != null) {
         res.json(filmes[id]);
@@ -27,7 +31,7 @@ app.get('/filmes:id', (req, res) => {
     res.json(filmes);
 
 })
-app.get('/produtos:id', (req, res) => {
+app.get('/produtos/:id', (req, res) => {
     const { id } = req.params
     if (id != null) {
         res.json(produtos[id]);
